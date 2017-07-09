@@ -1,0 +1,27 @@
+﻿@model List<EADTearmProject.Models.ProductModel>
+@{
+    ViewBag.Title = "Admin";
+    Layout = null;
+}
+<p>
+    @Html.ActionLink("Create New", "Create", new {id=0 });
+</p>
+<table>
+    <tr>
+        <th> product Name</th>
+        <th> </th>
+        <th> </th>
+    </tr>
+    @foreach(var item in Model)
+    {
+        <tr>
+            
+            <td>@item.p_name</td>
+            <td><img src="~/themes/images/@item.p_picture" style="width:100px;height:100px;" /></td>
+            <td>@Html.ActionLink("Edit", "Create", new {id=item.p_id})|
+                @Html.ActionLink("Delete", "DeleteProduct", new { id = item.p_id })
+            </td>
+
+        </tr>
+    }
+</table>

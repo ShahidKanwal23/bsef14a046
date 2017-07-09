@@ -1,0 +1,102 @@
+﻿
+@{
+    Layout = null;
+}
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Bootstrap E-commerce Templates</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <!--[if ie]><meta content='IE=8' http-equiv='X-UA-Compatible'/><![endif]-->
+    <!-- bootstrap -->
+    <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <link href="~/css/bootstrappage.css" rel="stylesheet" />
+
+    <!-- global styles -->
+    <link href="~/themes/css/flexslider.css" rel="stylesheet" />
+    <link href="~/themes/css/main.css" rel="stylesheet" />
+
+    <!-- scripts -->
+    <script src="~/themes/js/jquery-1.7.2.min.js"></script>
+    <script src="~/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/themes/js/superfish.js"></script>
+    <script src="~/themes/js/jquery.scrolltotop.js"></script>
+</head>
+<body>
+
+
+    <div>
+        <div id="top-bar" class="container">
+            <div class="row">
+                <div class="span4">
+                    <form method="POST" class="search_form">
+                        <input type="text" class="input-block-level search-query" placeholder="eg. T-sirt">
+                    </form>
+                </div>
+                <div class="span8">
+                    <div class="account pull-right">
+                        <ul class="user-menu">
+                            <li><b><a href="/Home/Index">Home</a></b></li>
+                            <li><a href="/Home/cart"><img src="~/themes/images/cart.png" style="width:30px;height:20px; margin-right:10px;" ><b><span><i>RS</i> @Session["total"].ToString()</span></b></a></li>
+                            @{
+                                if(Session["user"]==null)
+                                {
+                                    <li><b><a href="/Home/register"><img src="~/themes/images/login.png" style="width:40px;height:40px; ">Login </a></b></li>
+                                }
+                                else
+                                {
+                                    DataAccess.User user = (DataAccess.User)Session["user"];
+
+                                    <li><b><a href="~/Home/Logout"> <img src="~/themes/images/logout.png" style="width:30px;height:25px; margin-right:5px;"><i>@user.first_name</i></a></b></li>
+                                    
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="wrapper" class="container">
+            <section class="navbar main-menu">
+                <div class="navbar-inner main-menu">
+                    <a href="index.html" class="logo pull-left"><img src="~/themes/images/logo.png" class="site_logo" ></a>
+                    <nav id="menu" class="pull-right">
+                        <ul>
+                            <li>
+                                <a href="/Home/products/1">Woman</a>
+                            </li>
+                            <li><a href="/Home/products/2">Man</a></li>
+                            <li>
+                                <a href="/Home/products/3">Children</a>
+                            </li>
+                            <li>
+                                <a href="/Home/products/4">Sports</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </section>
+            <section class="homepage-slider" id="home-slider">
+                <div class="flexslider">
+                    <ul class="slides">
+                        <li>
+                            <img src="~/themes/images/carousel/banner-1.jpg" alt="" />
+                        </li>
+                        <li>
+                            <img src="~/themes/images/carousel/banner-2.jpg" alt="" />
+
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <div>
+                @RenderSection("scripts", false)
+            </div>
+            </div>
+            @RenderBody()
+        </div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+﻿@model EADTearmProject.Models.ProductModel
+@{
+    Layout = null;
+}
+
+<div class="span7">
+    <h4 class="title"><span class="text"><strong>Add</strong> Products</span></h4>
+    <form method="post" class="form-stacked" action="/Home/AddProduct" enctype="multipart/form-data">
+        <fieldset>
+            <div class="control-group">
+                <label class="control-label">Product Name</label>
+                <div class="controls">
+                    <input type="text" placeholder="Enter Product Name" class="input-xlarge" name="p_name" value="@Model.p_name">
+                </div>
+                <div class="controls">
+                    <input type="hidden" class="input-xlarge" name="p_id" value="@Model.p_id">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Product Price</label>
+                <div class="controls">
+                    <input type="text" placeholder="Enter Product Price" class="input-xlarge" name="p_price" value="@Model.p_price">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Product Description </label>
+                <div class="controls">
+                    <input type="text" placeholder="Enter Product Description" class="input-xlarge" name="p_description" value="@Model.p_description">
+                </div>
+            </div>
+            <div class="controls">
+                <img style="width:100px;height:100px;" src="~/themes/images/@Model.p_picture">
+            </div>
+            <div class="control-group">
+                <label class="control-label">Product Image </label>
+
+            </div>
+
+            <input type="file" name="image" />
+            <div class="control-group">
+                <select name="cat_id">
+                    @{
+                        List < EADTearmProject.Models.CategoryModel > list= ViewBag.list;
+                    }
+                    @foreach (var item in list)
+                    {
+                        <option value="@item.cat_id">@item.cat_name</option>
+                    }
+
+                </select>
+            </div>
+            <div class="control-group">
+                <select name="p_type">
+                    <option value="2">Feature</option>
+                    <option value="3">Latest</option>
+                    <option value="1">Simple</option>
+                </select>
+            </div>
+
+            <div class="actions"><input tabindex="9" class="btn btn-inverse large" type="submit" value="Save"></div>
+        </fieldset>
+    </form>
+</div>

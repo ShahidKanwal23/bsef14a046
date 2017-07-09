@@ -1,0 +1,56 @@
+﻿@model List<EADTearmProject.Models.ProductModel>
+@{
+    ViewBag.Title = "products";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+    var count = 0;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Bootstrap E-commerce Templates</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+</head>
+<body>
+
+    <div id="wrapper" class="container">
+
+        <section class="main-content">
+            <div class="row">
+                <div class="span9">
+                    <ul class="thumbnails listing-products">
+                        @{
+                            for (int i = 0; i < 3 && i < @Model.Count; i++)
+                            {
+                                <li class="span3">
+                                    <div class="product-box">
+                                        <span class="sale_tag"></span>
+                                        <a href="/Home/product_detail/@Model[i].p_id"><img alt="" src="~/themes/images/@Model[i].p_picture" style="width:200px;height:200px;"></a><br />
+                                        <a href="/Home/product_detail/@Model[i].p_id" class="title">Fusce id molestie massa</a><br />
+                                        <a href="#" class="category">Phasellus consequat</a>
+                                        <p class="price">@Model[i].p_price</p>
+                                    </div>
+                                </li>
+
+                            }
+                        }
+
+                    </ul>
+                    <hr>
+                    <div class="pagination pagination-small pagination-centered">
+                        <ul>
+                            <li><a href="/Home/NextFour/@ViewBag.preCount">Prev</a></li>
+                            <li class="active"><a href="#"></a></li>
+                            <li><a href="/Home/NextFour/@ViewBag.count">Next</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+    <script src="themes/js/common.js"></script>
+</body>
+</html>

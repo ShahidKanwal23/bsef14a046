@@ -1,0 +1,133 @@
+﻿@model EADTearmProject.Models.ProductModel
+
+@{
+    ViewBag.Title = "product_detail";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+@section scripts{
+    <script>
+
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toGMTString();
+            var user = getCookie("shahid");
+            if (user != null && user != "")
+            {
+                 cvalue+=user;
+            }
+            alert(user);
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+            
+        }
+
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function checkCookie() {
+            var quantity = document.getElementById("quantity").value;
+            var pid = document.getElementById("p_id").value;
+            var concate = quantity + "?" + pid;
+
+            setCookie("shahid", concate, 30);
+          
+        }
+
+    </script>
+    
+    }
+    <meta charset="utf-8">
+    <title>Bootstrap E-commerce Templates</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+</head>
+<body>
+ 
+    <div id="wrapper" class="container">
+      
+        <section class="main-content">
+            <div class="row">
+                <div class="span9">
+                    <div class="row">
+                        @{
+                                 <div class="span4">
+                                <a href="~/themes/images/@Model.p_picture" class="thumbnail" data-fancybox-group="group1" title="Description 1"><img alt="" src="~/themes/images/@Model.p_picture"></a>
+
+                                </div>
+                                <div class="span5">
+                                    <address>
+                                        <strong>Product Code:</strong> <span>@Model.p_id</span><br>
+                                        <strong>Name:</strong> <span>@Model.p_name</span><br>
+                                        <strong>Product Description:</strong> <span>@Model.p_description</span><br>
+                                    </address>
+                                    <h4><strong>Price: @Model.p_price</strong></h4>
+                                </div>   
+                            
+                        }
+                        
+                        <div class="span5">
+                            <form class="form-inline" action="/Home/AddToCart">
+                                <label class="checkbox">
+                                    <input type="checkbox" value=""> Option one is this and that
+                                </label>
+                                <br />
+                                <label class="checkbox">
+                                    <input type="checkbox" value=""> Be sure to include why it's great
+                                </label>
+
+                                <input type="hidden" name="p_id" value="@Model.p_id">
+                                <p>&nbsp;</p>
+                                <label>Qty:</label>
+                                <input type="text" class="span1" placeholder="1" name="quantity">
+                                <button class="btn btn-inverse" type="submit">Add to cart</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+    </div>
+    <script src="themes/js/common.js"></script>
+    <script>
+        $(function () {
+            $('#myTab a:first').tab('show');
+            $('#myTab a').click(function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+            })
+        })
+        $(document).ready(function () {
+            $('.thumbnail').fancybox({
+                openEffect: 'none',
+                closeEffect: 'none'
+            });
+
+            $('#myCarousel-2').carousel({
+                interval: 2500
+            });
+        });
+    </script>
+</body>
+</html>
